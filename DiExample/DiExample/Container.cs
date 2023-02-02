@@ -1,4 +1,9 @@
 ﻿using System;
+using DiExample.Selenium;
+using DiExample.Selenium.Page;
+using Microsoft.Extensions.DependencyInjection;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace DiExample
 {
@@ -6,7 +11,11 @@ namespace DiExample
     {
         public IServiceProvider BuildServiceProvider()
         {
-            throw new NotImplementedException();
+            return new ServiceCollection()
+                .AddTransient<IBrowser, Browser>()
+                .AddTransient<IWebDriver, ChromeDriver>()
+                .AddScoped<IPageFactory, PageFactory>()
+                .BuildServiceProvider();
         }
     }
 }
