@@ -18,7 +18,7 @@ public class Examples_AddSingleton : Base
             .AddSingleton<ConsoleWriter>(_ => new ConsoleWriter(text))
             .BuildServiceProvider();
 
-        // Берем из контейнера 2 разных экземпляра 1 объекта Token
+        // 2 раза берем из контейнера объект Token и кладем в разные переменные
         var tokenInstance1 = container.GetRequiredService<Token>();
         var tokenInstance2 = container.GetRequiredService<Token>();
 
