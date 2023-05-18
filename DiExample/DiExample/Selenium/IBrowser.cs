@@ -1,4 +1,7 @@
-﻿using DiExample.Selenium.Page;
+﻿using System.Collections.Generic;
+using DiExample.Selenium;
+using DiExample.Selenium.Page;
+using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace DiExample.Selenium
@@ -14,6 +17,7 @@ namespace DiExample.Selenium
     {
         #region Реализация
 
+        private static readonly List<IWebDriver> _allOpenBrowsers = new();
         private readonly IWebDriver _webDriver;
         private readonly IPageFactory _pageFactory;
 
@@ -21,6 +25,7 @@ namespace DiExample.Selenium
         {
             _webDriver = webDriver;
             _pageFactory = pageFactory;
+            _allOpenBrowsers.Add(webDriver);
         }
 
         public TPage GoToPage<TPage>() where TPage : class, IPage
@@ -33,5 +38,20 @@ namespace DiExample.Selenium
             => _webDriver.Navigate().GoToUrl(url);
 
         #endregion
+
+        public static void Dispose()
+        {
+            foreach (var driver in _allOpenBrowsers)
+            {
+                driver.Dispose();
+            }
+        }
     }
+}
+
+[SetUpFixture]
+public class BrowserDisposer
+{
+    [OneTimeTearDown]
+    public void Dispose() => Browser.Dispose();
 }
