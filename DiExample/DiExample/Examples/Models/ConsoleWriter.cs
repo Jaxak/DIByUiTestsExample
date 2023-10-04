@@ -4,16 +4,16 @@ namespace DiExample.Examples.Models;
 
 public class ConsoleWriter
 {
-    public readonly string Text;
+    public readonly string TokenInfo;
 
-    public ConsoleWriter(string text)
+    public ConsoleWriter(string tokenInfo)
     {
-        Text = text;
-        TestContext.Out.WriteLine($"Зарегестрировали {nameof(ConsoleWriter)} с текстом {Text}");
+        TokenInfo = tokenInfo;
+        TestContext.Out.WriteLine($"Зарегестрировали {nameof(ConsoleWriter)} с текстом {TokenInfo}");
     }
 
     public void WriteText()
     {
-        TestContext.Out.WriteLine($"В поле текст: {Text}");
+        TestContext.Out.WriteLine($"В поле текст: {TokenInfo}");
     }
 }

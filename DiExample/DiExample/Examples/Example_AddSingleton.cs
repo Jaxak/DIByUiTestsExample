@@ -36,8 +36,8 @@ public class Examples_AddSingleton : Base
         var writerInstance2 = container.GetRequiredService<ConsoleWriter>();
 
         // Проверяем, что экземпляры одинаковые, потому что использовался Singleton
-        Assert.AreEqual(text, writerInstance1.Text);
-        Assert.AreEqual(text, writerInstance2.Text);
+        Assert.AreEqual(text, writerInstance1.TokenInfo);
+        Assert.AreEqual(text, writerInstance2.TokenInfo);
 
         // Для наглядности можно смотреть в консоль
         writerInstance1.WriteText();

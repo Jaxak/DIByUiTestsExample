@@ -30,8 +30,8 @@ public class Examples_AddTransient : Base
         var writerInstance2 = container.GetRequiredService<ConsoleWriter>();
 
         // они по прежнему одинаковы, т.к. остался Singleton
-        Assert.AreEqual(text, writerInstance1.Text);
-        Assert.AreEqual(text, writerInstance2.Text);
+        Assert.AreEqual(text, writerInstance1.TokenInfo);
+        Assert.AreEqual(text, writerInstance2.TokenInfo);
         writerInstance1.WriteText();
         writerInstance2.WriteText();
     }
@@ -61,7 +61,7 @@ public class Examples_AddTransient : Base
         var writerInstance2 = container.GetRequiredService<ConsoleWriter>();
 
         // у нас по прежнему должны быть одинаковые объекты
-        Assert.AreEqual(writerInstance2.Text, writerInstance1.Text);
+        Assert.AreEqual(writerInstance2.TokenInfo, writerInstance1.TokenInfo);
         writerInstance1.WriteText();
         writerInstance2.WriteText();
     }
@@ -86,14 +86,14 @@ public class Examples_AddTransient : Base
         var writer1Instance1 = container.GetRequiredService<ConsoleTokenWriter1>();
         var writer1Instance2 = container.GetRequiredService<ConsoleTokenWriter1>();
 
-        Assert.AreEqual(writer1Instance2.Text, writer1Instance1.Text);
+        Assert.AreEqual(writer1Instance2.TokenInfo, writer1Instance1.TokenInfo);
         writer1Instance1.WriteText();
         writer1Instance2.WriteText();
 
         var writer2Instance1 = container.GetRequiredService<ConsoleTokenWriter2>();
         var writer2Instance2 = container.GetRequiredService<ConsoleTokenWriter2>();
 
-        Assert.AreEqual(writer2Instance1.Text, writer2Instance2.Text);
+        Assert.AreEqual(writer2Instance1.TokenInfo, writer2Instance2.TokenInfo);
         writer2Instance1.WriteText();
         writer2Instance2.WriteText();
 
@@ -102,7 +102,7 @@ public class Examples_AddTransient : Base
         // Затем находит объект Token для второго врайтера. 
         // Токен добавлен как Transient, а значит будет 2 разных токена для врайтеров.
         // Поэтому врайтеры будут разные.
-        Assert.AreNotEqual(writer1Instance2.Text, writer2Instance2.Text);
-        Assert.AreNotEqual(writer1Instance1.Text, writer2Instance1.Text);
+        Assert.AreNotEqual(writer1Instance2.TokenInfo, writer2Instance2.TokenInfo);
+        Assert.AreNotEqual(writer1Instance1.TokenInfo, writer2Instance1.TokenInfo);
     }
 }

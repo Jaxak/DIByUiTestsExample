@@ -26,19 +26,19 @@ public class Examples_AddScoped : Base
         var writer1Instance1 = container.GetRequiredService<ConsoleTokenWriter1>();
         var writer1Instance2 = container.GetRequiredService<ConsoleTokenWriter1>();
 
-        Assert.AreEqual(writer1Instance2.Text, writer1Instance1.Text);
+        Assert.AreEqual(writer1Instance2.TokenInfo, writer1Instance1.TokenInfo);
         writer1Instance1.WriteText();
         writer1Instance2.WriteText();
 
         var writer2Instance1 = container.GetRequiredService<ConsoleTokenWriter2>();
         var writer2Instance2 = container.GetRequiredService<ConsoleTokenWriter2>();
 
-        Assert.AreEqual(writer2Instance1.Text, writer2Instance2.Text);
+        Assert.AreEqual(writer2Instance1.TokenInfo, writer2Instance2.TokenInfo);
         writer2Instance1.WriteText();
         writer2Instance2.WriteText();
 
-        Assert.AreEqual(writer1Instance2.Text, writer2Instance2.Text);
-        Assert.AreEqual(writer1Instance1.Text, writer2Instance1.Text);
+        Assert.AreEqual(writer1Instance2.TokenInfo, writer2Instance2.TokenInfo);
+        Assert.AreEqual(writer1Instance1.TokenInfo, writer2Instance1.TokenInfo);
     }
 
     [Test]
@@ -64,19 +64,19 @@ public class Examples_AddScoped : Base
         var writer1_scope1_Instance1 = scop1.ServiceProvider.GetRequiredService<ConsoleTokenWriter1>();
         var writer1_scope1_Instance2 = scop1.ServiceProvider.GetRequiredService<ConsoleTokenWriter1>();
 
-        Assert.AreEqual(writer1_scope1_Instance2.Text, writer1_scope1_Instance1.Text);
+        Assert.AreEqual(writer1_scope1_Instance2.TokenInfo, writer1_scope1_Instance1.TokenInfo);
         writer1_scope1_Instance1.WriteText();
         writer1_scope1_Instance2.WriteText();
 
         var writer2_scope1_Instance1 = scop1.ServiceProvider.GetRequiredService<ConsoleTokenWriter2>();
         var writer2_scope1_Instance2 = scop1.ServiceProvider.GetRequiredService<ConsoleTokenWriter2>();
 
-        Assert.AreEqual(writer2_scope1_Instance1.Text, writer2_scope1_Instance2.Text);
+        Assert.AreEqual(writer2_scope1_Instance1.TokenInfo, writer2_scope1_Instance2.TokenInfo);
         writer2_scope1_Instance1.WriteText();
         writer2_scope1_Instance2.WriteText();
 
-        Assert.AreNotEqual(writer1_scope1_Instance2.Text, writer2_scope1_Instance2.Text);
-        Assert.AreNotEqual(writer1_scope1_Instance1.Text, writer2_scope1_Instance1.Text);
+        Assert.AreNotEqual(writer1_scope1_Instance2.TokenInfo, writer2_scope1_Instance2.TokenInfo);
+        Assert.AreNotEqual(writer1_scope1_Instance1.TokenInfo, writer2_scope1_Instance1.TokenInfo);
 
         var scop2 = container.CreateScope();
         Log("\nnСоздали Второй скоуп");
@@ -90,18 +90,18 @@ public class Examples_AddScoped : Base
         var writer1_scope2_Instance1 = scop2.ServiceProvider.GetRequiredService<ConsoleTokenWriter1>();
         var writer1_scope2_Instance2 = scop2.ServiceProvider.GetRequiredService<ConsoleTokenWriter1>();
 
-        Assert.AreEqual(writer1_scope2_Instance2.Text, writer1_scope2_Instance1.Text);
+        Assert.AreEqual(writer1_scope2_Instance2.TokenInfo, writer1_scope2_Instance1.TokenInfo);
         writer1_scope2_Instance1.WriteText();
         writer1_scope2_Instance2.WriteText();
 
         var writer2_scope2_Instance1 = scop2.ServiceProvider.GetRequiredService<ConsoleTokenWriter2>();
         var writer2_scope2_Instance2 = scop2.ServiceProvider.GetRequiredService<ConsoleTokenWriter2>();
 
-        Assert.AreEqual(writer2_scope2_Instance1.Text, writer2_scope2_Instance2.Text);
+        Assert.AreEqual(writer2_scope2_Instance1.TokenInfo, writer2_scope2_Instance2.TokenInfo);
         writer2_scope2_Instance1.WriteText();
         writer2_scope2_Instance2.WriteText();
 
-        Assert.AreNotEqual(writer1_scope2_Instance2.Text, writer2_scope2_Instance2.Text);
-        Assert.AreNotEqual(writer1_scope2_Instance1.Text, writer2_scope2_Instance1.Text);
+        Assert.AreNotEqual(writer1_scope2_Instance2.TokenInfo, writer2_scope2_Instance2.TokenInfo);
+        Assert.AreNotEqual(writer1_scope2_Instance1.TokenInfo, writer2_scope2_Instance1.TokenInfo);
     }
 }
